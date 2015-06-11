@@ -1,5 +1,5 @@
-# sergeyzh/tomcat6-lfs
-Tomcat 6 + LogFaces appender
+# sergeyzh/tomcat7-lfs
+Tomcat 7 + LogFaces appender
 
 Usage
 =====
