@@ -1,5 +1,5 @@
-# docker-tomcat6
-Tomcat 6 with necessary environment
+# docker-tomcat7
+Tomcat 7 with necessary environment
 
 Folders
 =======
