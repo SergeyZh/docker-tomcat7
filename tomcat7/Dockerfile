@@ -4,7 +4,7 @@ MAINTAINER Sergey Zhukov, sergey@jetbrains.com
 
 RUN /usr/sbin/useradd tomcat
 
-ENV TOMCAT_VER 7.0.62
+ENV TOMCAT_VER 7.0.63
 ENV TOMCAT_BIN apache-tomcat-${TOMCAT_VER}.tar.gz
 
 ENV WRAPPER_VER 3.5.26
