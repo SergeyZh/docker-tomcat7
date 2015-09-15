@@ -7,7 +7,7 @@ RUN /usr/sbin/useradd tomcat
 ENV TOMCAT_VER 7.0.63
 ENV TOMCAT_BIN apache-tomcat-${TOMCAT_VER}.tar.gz
 
-ENV WRAPPER_VER 3.5.26
+ENV WRAPPER_VER 3.5.27
 ENV WRAPPER_URL http://wrapper.tanukisoftware.com/download/${WRAPPER_VER}/wrapper-linux-x86-64-${WRAPPER_VER}.tar.gz
 
 RUN wget -O /home/tomcat/${TOMCAT_BIN} `curl https://tomcat.apache.org/download-70.cgi | \
