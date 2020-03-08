@@ -1,8 +1,10 @@
-FROM sergeyzh/centos6-java:jdk8
+FROM amazoncorretto:8u242
 
 MAINTAINER Sergey Zhukov, sergey@jetbrains.com
 
-RUN /usr/sbin/useradd tomcat
+RUN yum install -y shadow-utils wget tar gzip
+
+RUN useradd tomcat
 
 ENV TOMCAT_VER 7.0.64
 ENV TOMCAT_BIN apache-tomcat-${TOMCAT_VER}.tar.gz
@@ -10,8 +12,8 @@ ENV TOMCAT_BIN apache-tomcat-${TOMCAT_VER}.tar.gz
 ENV WRAPPER_VER 3.5.27
 ENV WRAPPER_URL http://wrapper.tanukisoftware.com/download/${WRAPPER_VER}/wrapper-linux-x86-64-${WRAPPER_VER}.tar.gz
 
-RUN wget -O /home/tomcat/${TOMCAT_BIN} `curl https://tomcat.apache.org/download-70.cgi | \
-	     grep ${TOMCAT_BIN} | grep -v www.apache.org | sed "s#.*href=\"\(.*${TOMCAT_BIN}\)\".*#\1#"` && \
+RUN wget -O /home/tomcat/${TOMCAT_BIN} https://archive.apache.org/dist/tomcat/tomcat-7/v${TOMCAT_VER}/bin/${TOMCAT_BIN}  \
+	     && \
 	     cd /home/tomcat && tar -xzf ${TOMCAT_BIN} && mv apache-tomcat-${TOMCAT_VER} apache-tomcat-current && rm -rf apache-tomcat-current/webapps/* && \
 	     rm /home/tomcat/${TOMCAT_BIN}
 
@@ -30,8 +32,10 @@ RUN wget -O /home/tomcat/wrapper-linux-x86-64-${WRAPPER_VER}.tar.gz ${WRAPPER_UR
              rm -rf wrapper && \
              rm wrapper-linux-x86-64-${WRAPPER_VER}.tar.gz
 
+RUN mkdir /usr/java64/ && ln -s ${JAVA_HOME} /usr/java64/current
+
 # Adding cacerts file from current Java disto to "conf" directory of Tomcat
-RUN cp /usr/java64/current/jre/lib/security/cacerts /home/tomcat/apache-tomcat-current/conf/truststore
+RUN cp ${JAVA_HOME}/jre/lib/security/cacerts /home/tomcat/apache-tomcat-current/conf/truststore
 
 ADD wrapper /home/tomcat/wrapper/
 ADD xslt /home/tomcat/xslt/
