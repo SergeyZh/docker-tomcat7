@@ -2,7 +2,7 @@ FROM amazoncorretto:8u242
 
 MAINTAINER Sergey Zhukov, sergey@jetbrains.com
 
-RUN yum install -y shadow-utils wget tar gzip
+RUN yum install -y shadow-utils wget tar gzip initscripts
 
 RUN useradd tomcat
 
