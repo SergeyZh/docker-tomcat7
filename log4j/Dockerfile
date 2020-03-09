@@ -1,4 +1,4 @@
-FROM sergeyzh/tomcat7
+FROM sergeyzh/tomcat7:amazoncorretto8
 
 MAINTAINER Sergey Zhukov, sergey@jetbrains.com
 
@@ -6,8 +6,8 @@ ENV LOG4J_VER 1.2.17
 ENV LOG4J_BIN log4j-${LOG4J_VER}.tar.gz
 
 # Download appropriate juli libs
-RUN URL=`curl https://tomcat.apache.org/download-70.cgi | \
-	grep Browse | grep -v www.apache.org | sed "s#.*href=\"\(.*${TOMCAT_VER}\)\".*#\1#"` && \
+RUN URL=https://archive.apache.org/dist/tomcat/tomcat-7/v${TOMCAT_VER} \
+	 && \
 	wget -O /home/tomcat/apache-tomcat-current/bin/tomcat-juli.jar ${URL}/bin/extras/tomcat-juli.jar && \
 	wget -O /home/tomcat/apache-tomcat-current/lib/tomcat-juli-adapters.jar ${URL}/bin/extras/tomcat-juli-adapters.jar
 
